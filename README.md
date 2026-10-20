@@ -35,7 +35,20 @@ INNER JOIN, GROUP BY, HAVING, CASE WHEN (tiering and risk tagging), aggregate fu
 ![Q5](q5_repeat_customers.png)
 
 ## Key Findings
-*(coming soon)*
+
+- Total delivered revenue is **₹4.74B**. **Electronics drives 72.6%** of it (₹3.44B), followed by Home (12.1%), Sports (8.0%) and Fashion (5.6%).
+- Grocery, Beauty and Books together contribute only **1.7%** of revenue.
+- Electronics (3,351) and Fashion (2,496) account for **46.8%** of all returned orders.
+- UPI processes **53.6%** of realized revenue, followed by COD (31.1%).
+- Cancellation rates are almost the same across all payment modes (**4.9% to 5.1%**), so every channel is tagged "Healthy".
+- **38,406 customers** placed more than one delivered order. The top repeat customers spend ₹740K to ₹890K each and are all VIP Patrons.
+
+## Business Recommendations
+
+- Reduce dependence on Electronics by growing Home and Sports.
+- Review the low-revenue categories (Grocery, Beauty, Books).
+- Investigate Electronics and Fashion returns.
+- Run loyalty rewards for the VIP segment.
 
 ## Files
 - `sales_analysis.sql`: all queries for the project
