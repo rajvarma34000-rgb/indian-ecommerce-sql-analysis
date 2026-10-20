@@ -34,7 +34,8 @@ WHERE s.Order_Status = 'Delivered'
 GROUP BY p.category
 ORDER BY SUM(s.total_amount) DESC;
 
-**### Q2. Lost discount value from cancellations**
+### Q2. Lost discount value from cancellations
+
 ```sql
 SELECT p.Category,
        FORMAT(SUM(s.Coupon_Discount), 2) AS lost_discount_value
@@ -44,7 +45,8 @@ WHERE s.Order_Status = 'Cancelled'
 GROUP BY p.Category
 ORDER BY SUM(s.Coupon_Discount) DESC;
 
-**### Q3. Returned orders by category**
+### Q3. Returned orders by category
+
 ```sql
 SELECT p.category, 
        FORMAT(COUNT(s.Order_ID), 0) AS returned_orders_count
@@ -54,7 +56,9 @@ WHERE s.Order_Status = 'Returned'
 GROUP BY p.Category
 ORDER BY COUNT(s.Order_ID) DESC;
 
-**### Q4. Payment channel performance**
+### Q4. Payment channel performance
+
+```sql
 SELECT Payment_Mode,
        FORMAT(COUNT(order_ID), 0) AS total_orders,
        FORMAT(COUNT(CASE WHEN Order_Status = 'Delivered' THEN 1 END), 0) AS delivered_orders,
@@ -68,7 +72,9 @@ FROM sales
 GROUP BY Payment_Mode 
 ORDER BY SUM(CASE WHEN Order_Status = 'Delivered' THEN Total_Amount ELSE 0 END) DESC;
 
-**### Q5. Repeat customers and loyalty tiers**
+### Q5. Repeat customers and loyalty tiers
+
+```sql
 SELECT Customer_ID, 
        FORMAT(COUNT(Order_ID), 0) AS total_delivered_orders,
        FORMAT(SUM(Total_Amount), 2) AS lifetime_spend,
@@ -82,35 +88,36 @@ GROUP BY Customer_ID
 HAVING COUNT(Order_ID) > 1
 ORDER BY SUM(Total_Amount) DESC;
 
-Key Findings
-Total delivered revenue is ₹4.74B. Electronics drives 72.6% of it (₹3.44B), followed by Home (12.1%), Sports (8.0%) and Fashion (5.6%).
+## Key Findings
 
-Grocery, Beauty and Books together contribute only 1.7% of revenue.
+* **Revenue Performance:** Total delivered revenue is **₹4.74B**. **Electronics drives 72.6%** of it (₹3.44B), followed by Home (12.1%), Sports (8.0%), and Fashion (5.6%).
+* **Underperforming Categories:** Grocery, Beauty, and Books together contribute only **1.7%** of revenue.
+* **Return Concentration:** Electronics (3,351) and Fashion (2,496) account for **46.8%** of all returned orders.
+* **Payment Gateway Distribution:** UPI processes **53.6%** of realized revenue, followed by COD (31.1%).
+* **Channel Operational Risk:** Cancellation rates remain consistent across all payment modes (**4.9% to 5.1%**), categorizing every channel as **Healthy**.
+* **VIP Customer Base:** **38,406 customers** placed more than one delivered order. The top repeat customers spend **₹740K to ₹890K** each, placing them in the **VIP Patron** tier.
 
-Electronics (3,351) and Fashion (2,496) account for 46.8% of all returned orders.
+---
 
-UPI processes 53.6% of realized revenue, followed by COD (31.1%).
+## Business Recommendations
 
-Cancellation rates are almost the same across all payment modes (4.9% to 5.1%), so every channel is tagged "Healthy".
+* **Portfolio Diversification:** Reduce revenue dependence on Electronics by scaling mid-tier categories like Home and Sports.
+* **Category Audit:** Evaluate low-margin and low-revenue segments (Grocery, Beauty, Books) to optimize listing and inventory costs.
+* **Reverse Logistics Reduction:** Investigate quality control, sizing, and packaging in Electronics and Fashion to curb high return volumes.
+* **Retention Programs:** Implement targeted loyalty rewards and early-access campaigns for the VIP Patron customer cohort.
 
-38,406 customers placed more than one delivered order. The top repeat customers spend ₹740K to ₹890K each and are all VIP Patrons.
+---
 
-Business Recommendations
-Reduce dependence on Electronics by growing Home and Sports.
+## Files
 
-Review the low-revenue categories (Grocery, Beauty, Books).
+* `sales_analysis.sql.sql`: Contains all SQL queries for the project.
 
-Investigate Electronics and Fashion returns.
+---
 
-Run loyalty rewards for the VIP segment.
+## Author
 
-Files
-sales_analysis.sql.sql: Contains all SQL queries for the project.
-
-Author
-Raj Varma
-
-LinkedIn: linkedin.com/in/raj-varma9326
+**Raj Varma**  
+LinkedIn: [linkedin.com/in/raj-varma9326](https://www.linkedin.com/in/raj-varma9326)
 
 
 
